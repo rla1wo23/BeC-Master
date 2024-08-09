@@ -13,3 +13,4 @@ Study Log to be cpp master
 5. Using Smart Pointers
 6. Digging into Giant Projects (etc LLVM)
 7. C++ Backend Projects
+8. Other features
