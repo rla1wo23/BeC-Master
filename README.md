@@ -11,7 +11,7 @@ Study Log to be cpp master
 3. File Modularisation
 4. Parallelism
 5. Using Smart Pointers
-6. Digging into Giant Projects (etc LLVM)
+6. Algorithms
 7. C++ Backend Projects
 8. Mathmatic Skills in C++
 9. Other features
