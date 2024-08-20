@@ -7,6 +7,7 @@ using namespace std;
 
 int V, E, st; // number of veticies, number of edges, start vertex
 int table[20005] = {0};
+int pre[20005] = {0};
 const int INF = 0x3f3f3f3f;
 int main() {
   ios::sync_with_stdio(0);
@@ -35,6 +36,7 @@ int main() {
       if (table[cur.Y] + nxt.X < table[nxt.Y]) {
         table[nxt.Y] = cur.X + nxt.X;
         pq.push({table[nxt.Y], nxt.Y});
+        pre[nxt.Y] = cur.Y;
       }
     }
   }
