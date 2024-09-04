@@ -10,7 +10,7 @@ Study Log to be cpp master
 2. Understanding and Utilising STL
 3. File Modularisation
 4. Parallelism
-5. Using Smart Pointers
+5. Memory&Pointers
 6. Algorithm Implementation
 7. C++ Backend Projects
 8. Mathmatic Skills in C++
