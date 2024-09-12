@@ -10,9 +10,7 @@ int main() {
   std::cout << "Original value of variable num : " << num << std::endl;
   modifyWithPointer(ptr);
   std::cout << "Modified value (using pointer): " << num << std::endl;
-
   modifyWithReference(ref);
   std::cout << "Modified value (using reference): " << ref << std::endl;
-
   return 0;
 }

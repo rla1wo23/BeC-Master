@@ -15,3 +15,4 @@ Study Log to be cpp master
 7. C++ Backend Projects
 8. Mathmatic Skills in C++
 9. Other features
+10. Toy Projects
