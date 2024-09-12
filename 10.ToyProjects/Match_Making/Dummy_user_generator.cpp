@@ -5,7 +5,6 @@
 #include <regex>
 #include <string>
 using namespace std;
-
 int main() {
   ifstream inputFile("rating_log.txt");
   int max_user_number = 0;
@@ -21,15 +20,12 @@ int main() {
     }
     inputFile.close();
   }
-
   ofstream outputFile("rating_log.txt", ios::app);
   if (!outputFile.is_open()) {
     cerr << "파일을 열 수 없습니다." << endl;
     return 1;
   }
-
   srand(time(0));
-
   for (int i = 1; i <= 20; ++i) {
     string username = "user" + to_string(max_user_number + i);
     int random_score = 1000 + rand() % 1001;

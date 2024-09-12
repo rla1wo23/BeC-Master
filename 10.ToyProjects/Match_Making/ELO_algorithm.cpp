@@ -8,10 +8,9 @@ using namespace std;
 
 // ELO 점수를 계산
 pair<int, int> ELO_rating(int rating1, int rating2, int winner) {
-  const int K_Factor = 32;
+  const int K_Factor = 16;
   double expected1 = 1.0 / (1.0 + pow(10, (rating2 - rating1) / 400.0));
   double expected2 = 1.0 / (1.0 + pow(10, (rating1 - rating2) / 400.0));
-
   if (winner == 1) {
     rating1 += K_Factor * (1 - expected1);
     rating2 += K_Factor * (0 - expected2);
@@ -52,12 +51,11 @@ void add_new_user(unordered_map<string, int> &rating) {
   cout << "신규 유저 이름을 입력하세요: ";
   cin >> username;
 
-  if (rating.find(username) != rating.end()) {
+  if (rating[username] != 0) {
     cout << "이미 존재하는 사용자입니다." << endl;
     return;
   }
-
-  rating[username] = 1000; // 기본 점수 1000
+  rating[username] = 1000;
   cout << username << " 사용자가 추가되었습니다. 초기 점수는 1000점입니다."
        << endl;
 }
