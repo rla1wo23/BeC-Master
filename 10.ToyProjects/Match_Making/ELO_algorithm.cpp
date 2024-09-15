@@ -9,6 +9,7 @@ using namespace std;
 // ELO 점수를 계산
 pair<int, int> ELO_rating(int rating1, int rating2, int winner) {
   const int K_Factor = 16;
+  // 점수차이 0점: 기댓값=1/2, 점수차이 400점: 1/11
   double expected1 = 1.0 / (1.0 + pow(10, (rating2 - rating1) / 400.0));
   double expected2 = 1.0 / (1.0 + pow(10, (rating1 - rating2) / 400.0));
   if (winner == 1) {
@@ -104,7 +105,6 @@ int main() {
     cin >> user1;
     cout << "두 번째 사용자 이름: ";
     cin >> user2;
-
     match(name_to_rating, user1, user2);
   } else if (choice == 3) {
     get_user_rating(name_to_rating);
