@@ -1,0 +1,3 @@
+/Users/jazzmaster/Developer/cppMaster/3.FileModularisation/CMake/build/CMakeFiles/addExampleExe.dir
+/Users/jazzmaster/Developer/cppMaster/3.FileModularisation/CMake/build/CMakeFiles/edit_cache.dir
+/Users/jazzmaster/Developer/cppMaster/3.FileModularisation/CMake/build/CMakeFiles/rebuild_cache.dir
