@@ -6,7 +6,7 @@ public:
   virtual void print() { std::cout << "T1 is not Defined\n"; }
 };
 
-#ifdef T1 // if T1 defined, then below this codes could be runned
+#ifdef T1 // if T1 defined, then below this codes could be ran
 class test2 : public test1 {
 public:
   void print() override { std::cout << "T1 is Defined\n"; }
