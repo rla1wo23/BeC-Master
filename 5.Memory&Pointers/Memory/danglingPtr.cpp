@@ -8,7 +8,7 @@ void dangling_ptr() {
   if (ptr != nullptr) {
     std::cout << ptr << "\n";
   } else {
-    std::cout << "you guarded access to nullptr!\n";
+    std::cout << "you successfully guarded access to nullptr!\n";
   }
 }
 int main() { dangling_ptr(); }
