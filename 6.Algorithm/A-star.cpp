@@ -3,46 +3,35 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-
+using namespace std;
 struct Node {
-  int x, y; // 좌표
-  float g, h; // g: 시작점부터 현재 노드까지의 비용, h: 휴리스틱(목표까지의 추정
-              // 비용)
-  Node *parent; // 이전 노드 포인터 (경로를 추적하는 데 사용)
-
+  int x, y;   // 좌표
+  float g, h; // g: 시작점부터 현재 노드까지의 비용, h:휴리스틱 값(추정 근사값)
+  Node *parent;                     // 이전 노드 경로
   float f() const { return g + h; } // f = g + h
-
   bool operator<(const Node &other) const {
-    return f() > other.f(); // 우선순위 큐에서 최소 f값을 우선
+    return f() > other.f(); // pq에서 최소 f값을 우선하게끔, 비교 연산자 정의
   }
 };
+// 2차원 그리드 맵
+vector<vector<int>> grid;
+// 상하좌우 방향
+const vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+// 휴리스틱 거리 추정함수
+float h(int x1, int y1, int x2, int y2) { return abs(x1 - x2) + abs(y1 - y2); }
 
-// 글로벌 선언된 grid
-std::vector<std::vector<int>> grid;
-
-// 방향 벡터 (상, 하, 좌, 우)
-const std::vector<std::pair<int, int>> directions = {
-    {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-// 휴리스틱 함수
-float h(int x1, int y1, int x2, int y2) {
-  return std::abs(x1 - x2) + std::abs(y1 - y2);
-}
-
-bool isValid(int x, int y) {
+bool isValid(int x, int y) { // 탐색 가능한 경로인지
   int rows = grid.size();
   int cols = grid[0].size();
   return x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] == 0;
 }
 
-std::vector<std::pair<int, int>> aStar(std::pair<int, int> start,
-                                       std::pair<int, int> goal) {
+vector<pair<int, int>> aStar(pair<int, int> start, pair<int, int> goal) {
   int rows = grid.size();
   int cols = grid[0].size();
 
-  std::priority_queue<Node> openList; // 우선순위 큐 (f값이 낮은 노드부터 처리)
-  std::vector<std::vector<bool>> closedList(rows,
-                                            std::vector<bool>(cols, false));
+  priority_queue<Node> openList; // 우선순위 큐 (f값이 낮은 노드부터 처리)
+  vector<vector<bool>> closedList(rows, vector<bool>(cols, false));
 
   // 시작 노드 초기화
   Node *startNode =
@@ -60,13 +49,13 @@ std::vector<std::pair<int, int>> aStar(std::pair<int, int> start,
 
     // 목표에 도달
     if (current.x == goal.first && current.y == goal.second) {
-      std::vector<std::pair<int, int>> path;
+      vector<pair<int, int>> path;
       Node *pathNode = &current;
       while (pathNode) {
         path.emplace_back(pathNode->x, pathNode->y);
         pathNode = pathNode->parent;
       }
-      std::reverse(path.begin(), path.end());
+      reverse(path.begin(), path.end());
       return path;
     }
 
@@ -89,23 +78,23 @@ std::vector<std::pair<int, int>> aStar(std::pair<int, int> start,
 
 int main() {
   int choice;
-  std::cout << "Choose an option:\n";
-  std::cout << "1. Enter grid manually\n";
-  std::cout << "2. Use default grid\n";
-  std::cin >> choice;
+  cout << "Choose an option:\n";
+  cout << "1. Enter grid manually\n";
+  cout << "2. Use default grid\n";
+  cin >> choice;
 
   if (choice == 1) {
     int rows, cols;
-    std::cout << "Enter grid dimensions (rows cols): ";
-    std::cin >> rows >> cols;
+    cout << "Enter grid dimensions (rows cols): ";
+    cin >> rows >> cols;
 
-    grid.resize(rows, std::vector<int>(cols));
-    std::cout << "Enter grid (0 for open, 1 for obstacle):\n";
-    std::cout << "Input format: Enter " << cols
-              << " numbers per row, separated by spaces.\n";
+    grid.resize(rows, vector<int>(cols));
+    cout << "Enter grid (0 for open, 1 for obstacle):\n";
+    cout << "Input format: Enter " << cols
+         << " numbers per row, separated by spaces.\n";
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < cols; ++j) {
-        std::cin >> grid[i][j];
+        cin >> grid[i][j];
       }
     }
   } else {
@@ -114,32 +103,32 @@ int main() {
         {0, 1, 0, 0, 0}, {0, 1, 0, 1, 0}, {0, 0, 0, 1, 0},
         {0, 1, 1, 1, 0}, {0, 0, 0, 0, 0},
     };
-    std::cout << "Using default grid:\n";
+    cout << "Using default grid:\n";
     for (const auto &row : grid) {
       for (const auto &cell : row) {
-        std::cout << cell << " ";
+        cout << cell << " ";
       }
-      std::cout << "\n";
+      cout << "\n";
     }
   }
 
-  std::pair<int, int> start, goal;
-  std::cout << "Enter start coordinates (x y): ";
-  std::cin >> start.first >> start.second;
+  pair<int, int> start, goal;
+  cout << "Enter start coordinates (x y): ";
+  cin >> start.first >> start.second;
 
-  std::cout << "Enter goal coordinates (x y): ";
-  std::cin >> goal.first >> goal.second;
+  cout << "Enter goal coordinates (x y): ";
+  cin >> goal.first >> goal.second;
 
   auto path = aStar(start, goal);
 
   if (!path.empty()) {
-    std::cout << "Path found:\n";
+    cout << "Path found:\n";
     for (const auto &p : path) {
-      std::cout << "(" << p.first << ", " << p.second << ") ";
+      cout << "(" << p.first << ", " << p.second << ") ";
     }
-    std::cout << "\n";
+    cout << "\n";
   } else {
-    std::cout << "No path found.\n";
+    cout << "No path found.\n";
   }
 
   return 0;
